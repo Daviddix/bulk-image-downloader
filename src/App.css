@@ -1,0 +1,77 @@
+*, *::before, *::after{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+img{
+    max-width:100%;
+}
+
+:root{
+    --inputBg: #ECEEF8;
+    --darkBlue: #030517;
+    --buttonBg: #060A2D;
+    --mainBg: #F2F2FD;
+    --overlay: #51331e67;
+    --headerShadow: #1F35FF;
+}
+
+@font-face {
+    font-family: clash;
+    src: url("./assets/fonts/ClashGrotesk-Regular.otf");
+}
+
+@font-face {
+    font-family: clashMedium;
+    src: url("./assets/fonts/ClashGrotesk-Medium.otf");
+}
+
+@font-face {
+    font-family: clashBold;
+    src: url("./assets/fonts/ClashGrotesk-Bold.otf");
+}
+
+@font-face {
+    font-family: montserrat;
+    src: url("./assets/fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+    font-family: montserratMedium;
+    src: url("./assets/fonts/Montserrat-Medium.ttf");
+}
+
+::selection{
+    background-color:var(--darkBlue);
+    color: white;
+}
+
+main{
+    width:90vw;
+    max-width:110rem;
+    margin: auto;
+}
+
+.back-to-top-container{
+    background-color: var(--buttonBg);
+    width:5rem;
+    height:5rem;
+    border-radius: 50%;
+    position: absolute;
+    top:90%;
+    right:4%;
+    z-index: 5;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%; 
+    -o-border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 .3rem var(--buttonBg);
+}

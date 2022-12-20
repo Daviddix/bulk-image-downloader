@@ -1,0 +1,102 @@
+.bg .header{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    position: fixed;
+    top:0;
+    left:0;
+}
+
+main.pack-view{
+    margin: auto;
+}
+
+.bg{
+    min-height: 100vh;
+    padding: 0 0 2rem 0;
+}
+
+.header > img{
+    margin: 0 1rem 0 0;
+}
+
+.pack-view .pack-name{
+    font-size: 2rem;
+    padding: 6rem 0 0 0;
+    margin: 2rem 0 2rem;
+    font-family: clashmedium;
+    letter-spacing: .2px;
+}
+
+.pack-view .pack-images{
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit, minmax(14rem, 1fr)
+    );
+    align-items: center;
+    column-gap: 2rem;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.pack-images > div{
+    border: solid;
+    width: 15rem;
+    max-width: 20rem;
+    height:20rem;
+    margin: 0 0 2rem 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
+
+.pack-image-container img{
+    object-fit: cover;
+    min-height: 100%;
+    transition: ease .2s;
+    -webkit-transition: ease .2s;
+    -moz-transition: ease .2s;
+    -ms-transition: ease .2s;
+    -o-transition: ease .2s;
+}
+
+.pack-view .download-button{
+    margin:2rem auto;
+}
+
+@media screen and (min-width:850px) {
+    .pack-view .pack-images{
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+    }
+
+    .pack-images > div{
+        width: 18rem;
+        height: 25rem;
+    }
+}
+
+@media screen and (min-width:1200px){
+    .pack-view .pack-images{
+        display: grid;
+        grid-template-columns: repeat(5, auto);
+    }
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.pack-images div img:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+}

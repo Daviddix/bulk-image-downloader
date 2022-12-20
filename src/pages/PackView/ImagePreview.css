@@ -1,0 +1,65 @@
+.background{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    min-height:100vh;
+    z-index: 4;
+    background-color: var(--overlay);
+    backdrop-filter: blur(1rem);
+    animation: forwards blur 2s ease-in;
+    padding: 0 0 20rem 0;
+    -webkit-animation: forwards blur 2s ease-in;
+}
+
+.background .preview-content{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 90%;
+    max-width: 40rem;
+    margin: 9rem auto 0;
+}
+
+.preview-content .close-button{
+    width: 3rem;
+    margin: 0 0 2rem 0;
+    position: relative;
+}
+
+.preview-content .image-container{
+    width: 100%;
+    max-width: 40rem;
+    height: 50rem;
+    overflow: hidden;
+    margin: auto;
+    border:4px solid;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
+
+.image-container img{
+    object-fit: cover;
+    height: 100%;
+    width:100%;
+}
+
+@media screen and (min-width:850px){
+    .background .preview-content{
+        max-width: 45rem;
+    }
+
+    .preview-content .image-container{
+        height:60rem;
+        max-width: 45rem;
+    }
+}
+
+@keyframes blur {
+    to{
+        backdrop-filter: blur(2rem);
+    }
+}

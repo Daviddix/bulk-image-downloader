@@ -1,0 +1,231 @@
+.results{
+    min-height:100vh;
+}
+
+.bg{
+    background-color: var(--mainBg);
+    height: 100%;
+}
+
+.header{
+    min-width:100%;
+    top:0;
+    left:0;
+    padding:1rem 2rem;
+    z-index: 2;
+    background-color: white;
+    box-shadow: 0 .2rem .5rem #1f35ff1e;
+    border-bottom: 1px solid black;
+}
+
+.header .input-and-search-container{
+    border: 1.5px solid var(--darkBlue);
+    width: 85vw;
+    max-width: 40rem;
+    margin: auto;
+    border-radius: 4rem;
+    -webkit-border-radius: 4rem;
+    -moz-border-radius: 4rem;
+    -ms-border-radius: 4rem;
+    -o-border-radius: 4rem;
+    display: flex;
+    justify-content: space-between;
+    padding:.5rem;
+    background-color: var(--inputBg);
+}
+
+.input-and-search-container input{
+    width:90%;
+    padding:0 0 0 2rem;
+    border:none;
+    background-color: transparent;
+    outline: none;
+    font-family: montserrat;
+}
+
+.input-and-search-container img{
+    background-color: var(--darkBlue);
+    width: 3rem;
+    padding: .4rem; 
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.resultName{
+    padding: 8rem 0 0 0;
+    margin: 2rem 0 2rem 0rem;
+    font-family: clashmedium;
+    font-size: 1.8rem;
+    letter-spacing: .2px;
+}
+
+.resultName .product{
+    color: var(--headerShadow);
+}
+
+.pack-container{
+    max-width: 32rem;
+    margin: auto;
+}
+
+.pack-container .pack{
+    border:1px solid rgba(0, 0, 0, 0.699);
+    padding: 1rem ;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    background-color: white;
+    margin: 0 0 3rem 0;
+    max-width: 32rem;
+}
+
+.pack .swiper{
+    border: 2px solid rgba(0, 0, 0, 0.26);
+    width: 100%;
+    height: 17rem;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
+
+.swiper img{
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+
+}
+
+.pack .dots{
+    display: flex;
+    max-width: 3rem;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem auto;
+}
+
+.dots span{
+    width:.8rem;
+    height: .8rem;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.349);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+
+.dots span.active{
+    background-color: rgba(0, 0, 0, 0.753);
+}
+
+.pack .pack-name{
+    font-family: clashmedium;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.pack .pack-number{
+    font-family: montserrat;
+    font-size: 1.2rem;
+    text-align: center;
+    margin:1rem 0 1.5rem 0;
+}
+
+.pack .buttons{
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.buttons button{
+    transition: .2s ease-in;
+    -webkit-transition: .2s ease-in;
+    -moz-transition: .2s ease-in;
+    -ms-transition: .2s ease-in;
+    -o-transition: .2s ease-in;
+}
+
+.download-button{
+   display: block;
+   padding: .9rem 1.5rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: montserrat;
+   color:white;
+   background-color: var(--buttonBg);
+   border:none;
+   border-radius: .5rem;
+   -webkit-border-radius: .5rem;
+   -moz-border-radius: .5rem;
+   -ms-border-radius: .5rem;
+   -o-border-radius: .5rem;
+}
+
+.download-button img{
+    max-width: 1.5rem;
+    margin: 0 1rem 0 0;
+}
+
+.buttons .view-images-button{
+    font-family: montserrat;
+    display: block;
+    padding: .7rem 1.5rem;
+    background-color: transparent;
+    border:2px solid var(--buttonBg);
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
+}
+
+@media screen and (min-width:800px) {
+    .resultName{
+        margin: 2rem 0 2rem 0rem;
+        font-family: clashmedium;
+        font-size: 2rem;
+        letter-spacing: .2px;
+    }
+
+    .pack-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+        justify-items: center;
+    }
+    
+    .pack{
+        width:32rem; 
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .pack-container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 100%;
+        justify-items: center;
+    }
+}
+
+/* hover states */
+.input-and-search-container img{
+    cursor: pointer;
+}
+
+.buttons button:hover{
+    cursor: pointer;
+}
