@@ -14,8 +14,8 @@
     padding:1rem 2rem;
     z-index: 2;
     background-color: white;
-    box-shadow: 0 .2rem .5rem #1f35ff1e;
-    border-bottom: 1px solid black;
+    box-shadow: 0 .2rem .5rem #1f35ff09;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.37);
 }
 
 .header .input-and-search-container{
@@ -217,7 +217,24 @@
     font-family: clashmedium;
     letter-spacing: .2px;
     font-size: 1.8rem;
+}
 
+.error{
+    border:2px solid rgb(190, 1, 1);
+    padding:.5rem;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    background-color: rgb(255, 239, 239);
+    max-width: 50rem;
+}
+
+.error p{
+    font-size: 1.3rem;
+    font-family: montserrat;
+    color:rgb(139, 6, 6);
 }
 
 @media screen and (min-width:800px) {
@@ -237,6 +254,10 @@
     
     .pack{
         width:32rem; 
+    }
+
+    .error p{
+        font-size: 1.5rem;
     }
 }
 

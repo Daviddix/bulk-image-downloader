@@ -13,7 +13,7 @@ function App() {
 
       <Route path="/:searchTerm" element={<Results />} />
 
-      <Route path="/packview" element={<PackView />} />
+      <Route path="/packview/:collectionId" element={<PackView />} />
     </Routes>
 
   )

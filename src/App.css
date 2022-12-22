@@ -62,7 +62,7 @@ main{
     width:5rem;
     height:5rem;
     border-radius: 50%;
-    position: absolute;
+    position: fixed;
     top:90%;
     right:4%;
     z-index: 5;
@@ -74,4 +74,5 @@ main{
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 .3rem var(--buttonBg);
+    cursor: pointer;
 }

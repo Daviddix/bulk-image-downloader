@@ -11,6 +11,7 @@ function InputAndSearchButton() {
     e.preventDefault()
     if (value.trim()) {
       navigate(`/${value}`)
+      setSearchInput("")
     }else{
       setInputError(true)
     }
@@ -24,13 +25,18 @@ function InputAndSearchButton() {
 
     <input
     value={searchInput}
+
     onChange={(e)=>{
       setInputError(false)
       setSearchInput(e.target.value)
     }}
     type="text" 
     placeholder="Shoes" />
-    <img src={searchIcon} alt="search button" />
+
+    <img 
+    onClick={(e)=> formValidator(e,searchInput)}
+    src={searchIcon} 
+    alt="search button" />
     </form>
 
     {inputError && <p className="err">Please enter a value</p>}

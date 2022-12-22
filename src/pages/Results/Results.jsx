@@ -1,23 +1,52 @@
-import DownloadButton from '../../Components/DownloadButton'
 import InputAndSearchButton from '../../Components/InputAndSearchButton'
 import styles from './Results.css'
-import arrowUp from "../../assets/arrow-up.svg"
-import shoe1 from "../../assets/shoe-1.jpeg"
-import shoe2 from "../../assets/shoe-2.jpeg"
-import shoe3 from "../../assets/shoe-3.png"
 import BackToTop from '../../Components/BackToTop'
 import searchingSvg from "../../assets/searching.svg"
-import { Swiper, SwiperSlide} from 'swiper/react'
-import "swiper/css"
 import { useState } from 'react'
-import { useRef } from 'react'
 import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import CollectionPack from '../../Components/CollectionPack'
+import ErrorComponent from '../../Components/ErrorComponent'
 
-function Results() {
-    const [activeIndex, setActiveIndex] = useState(0)
-    const [isLoading, setIsLoading] = useState(false)
-    const sliderRef = useRef()
+function Results() {    
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(false)
     const {searchTerm} = useParams()  
+    const [collectionArray, setCollectionArray] = useState([])
+    const key = "grlfAMIokyV8ggKFoRN7DuagfFeBWdcr8sxvWgpCvaQ"
+
+    useEffect(()=>{
+        setIsLoading(true)
+        fetch(`https://api.unsplash.com/search/collections/?per_page=20&client_id=${key}&query=${searchTerm}`)
+        .then(response => response.json())
+        .then(collection =>{      
+            if (collection.total == 0) {
+                throw new Error
+            }      
+            setError(false)
+            setCollectionArray(collection.results)
+            setIsLoading(false)
+
+        })
+        .catch(()=>{
+            setCollectionArray([])
+            setError(true)
+            setIsLoading(false)
+        })
+    }, [searchTerm])
+
+    const collectionPack = collectionArray.map((collection)=>{
+        return <CollectionPack
+                key={collection.id}
+                id={collection.id}
+                title={collection.title}
+                total={collection.total_photos}
+                user={collection.user.username}
+                previewPhotoOne={collection.preview_photos[0]?.urls.small}
+                previewPhotoTwo={collection.preview_photos[1]?.urls.small}
+                previewPhotoThree={collection.preview_photos[2]?.urls.small}
+        />
+    })
 
   return (
     <div className="bg">
@@ -27,48 +56,11 @@ function Results() {
 
     <main className='results'>      
         <p className='resultName'>Showing results for <span className="product">{searchTerm}</span></p>
+        {error && <ErrorComponent />}
 
         <div className="pack-container">
 
-        <div className="pack">
-            <Swiper 
-            ref={sliderRef}
-            className="carousel" 
-            onSlideChange={(e)=>{
-                setActiveIndex(e.activeIndex)
-            }}
-            >
-                <SwiperSlide><img src={shoe1} alt="" /></SwiperSlide>
-                <SwiperSlide><img src={shoe2} alt="" /></SwiperSlide>
-                <SwiperSlide><img src={shoe3} alt="" /></SwiperSlide>
-            </Swiper>
-            <div className="dots">
-                <span 
-                onClick={()=>{
-                    sliderRef.current.swiper.slideTo(0)
-                }}
-                className={activeIndex == 0? "active" : ""}></span>
-
-                <span 
-                onClick={()=>{
-                    sliderRef.current.swiper.slideTo(1)
-                }}
-                className={activeIndex == 1? "active" : ""}></span>
-                <span 
-                onClick={()=>{
-                    sliderRef.current.swiper.slideTo(2)
-                }}
-                className={activeIndex == 2? "active" : ""}></span>
-            </div>
-
-            <p className="pack-name">• Sneakers Pack Album vol 1.</p>
-            <p className="pack-number">• 20 images</p>
-
-            <div className="buttons">
-                <DownloadButton title={"Download"} />
-                <button className='view-images-button'>View Images</button>
-            </div>
-        </div>
+        {collectionPack}
 
         </div>     
        
