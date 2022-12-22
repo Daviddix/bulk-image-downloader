@@ -16,7 +16,7 @@ function Home() {
         <p className="subheading">Using Bulk Downloader, you can download 30+ images at once at just the click of a button
         </p>
 
-      <InputAndSearchButton />
+      <InputAndSearchButton  />
     </main>
   )
 }

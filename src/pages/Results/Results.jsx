@@ -6,22 +6,27 @@ import shoe1 from "../../assets/shoe-1.jpeg"
 import shoe2 from "../../assets/shoe-2.jpeg"
 import shoe3 from "../../assets/shoe-3.png"
 import BackToTop from '../../Components/BackToTop'
+import searchingSvg from "../../assets/searching.svg"
 import { Swiper, SwiperSlide} from 'swiper/react'
 import "swiper/css"
 import { useState } from 'react'
 import { useRef } from 'react'
+import { useParams } from 'react-router-dom'
 
 function Results() {
     const [activeIndex, setActiveIndex] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
     const sliderRef = useRef()
+    const {searchTerm} = useParams()  
+
   return (
     <div className="bg">
         <header className="header">
-        <InputAndSearchButton />
+        <InputAndSearchButton  />
         </header>
 
     <main className='results'>      
-        <p className='resultName'>Showing results for <span className="product">sneakers</span></p>
+        <p className='resultName'>Showing results for <span className="product">{searchTerm}</span></p>
 
         <div className="pack-container">
 
@@ -65,12 +70,14 @@ function Results() {
             </div>
         </div>
 
-        </div>
-
-        
-
-        
+        </div>     
+       
     </main>
+
+    {isLoading && <div className="loader">
+        <img src={searchingSvg} alt="image of a woman holding binoculars" />
+        <p>Searching for images...</p>
+    </div>}
     
     <BackToTop />
     </div>
