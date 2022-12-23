@@ -54,6 +54,10 @@
     -o-border-radius: 50%;
 }
 
+.bg p.err{
+    display: none;
+}
+
 .resultName{
     padding: 8rem 0 0 0;
     margin: 2rem 0 2rem 0rem;
@@ -72,7 +76,7 @@
 }
 
 .pack-container .pack{
-    border:1px solid rgba(0, 0, 0, 0.699);
+    border:1px solid rgba(0, 0, 0, 0.479);
     padding: 1rem ;
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
@@ -100,7 +104,11 @@
     height: 100%;
     max-width: none;
     object-fit: cover;
-
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
 }
 
 .pack .dots{

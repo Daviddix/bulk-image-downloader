@@ -1,5 +1,5 @@
 .background{
-    position: absolute;
+    position: fixed;
     top:0;
     left:0;
     width: 100%;
@@ -7,9 +7,9 @@
     z-index: 4;
     background-color: var(--overlay);
     backdrop-filter: blur(1rem);
-    animation: forwards blur 2s ease-in;
+    animation: forwards blur .5s ease-in-out;
     padding: 0 0 20rem 0;
-    -webkit-animation: forwards blur 2s ease-in;
+    -webkit-animation: forwards blur .5s ease-in-out;
 }
 
 .background .preview-content{
@@ -25,6 +25,9 @@
     width: 3rem;
     margin: 0 0 2rem 0;
     position: relative;
+    filter: drop-shadow(0 0 .1rem rgba(0, 0, 0, 0.432));
+    -webkit-filter: drop-shadow(0 0 .1rem rgba(0, 0, 0, 0.432));
+    cursor: pointer;
 }
 
 .preview-content .image-container{

@@ -20,6 +20,7 @@ main.pack-view{
 
 .header > img{
     margin: 0 1rem 0 0;
+    cursor: pointer;
 }
 
 .pack-view .pack-name{
@@ -28,6 +29,12 @@ main.pack-view{
     margin: 2rem 0 2rem;
     font-family: clashmedium;
     letter-spacing: .2px;
+}
+
+.pack-name .pack-info{
+    font-size: 1.2rem;
+    color:rgba(102, 48, 116, 0.63);
+    font-family: montserrat;
 }
 
 .pack-view .pack-images{

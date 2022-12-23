@@ -1,15 +1,25 @@
-import shoe10 from "../assets/shoe-10.jpg"
 import closeButton from "../assets/x.svg"
 import preview from "../pages/PackView/ImagePreview.css"
 
-function ImageViewer() {
+function ImageViewer({src, bgColor,setImagePreviewSrc}) {
+  const style = {
+    backgroundColor : `${bgColor}67`
+  }
+
   return (
-    <div className="background">
+    <div className="background" style={style}>
+
       <div className="preview-content">
-        <img src={closeButton} alt="close image preview" className="close-button"/>
+        <img 
+        onClick={()=>{
+          setImagePreviewSrc("")
+        }}
+        src={closeButton} 
+        alt="close image preview" 
+        className="close-button"/>
 
         <div className="image-container">
-            <img src={shoe10} alt="" />
+            <img src={src} alt="" />
         </div>
       </div>
         

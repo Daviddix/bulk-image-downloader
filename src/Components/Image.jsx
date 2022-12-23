@@ -1,8 +1,15 @@
-import React from 'react'
+function Image({src, color, setImagePreviewSrc,setBgColor}) {
 
-function Image({src}) {
+  function handleImageClick(src, color){
+    setImagePreviewSrc(src)
+    setBgColor(color)
+  }
   return (
-    <div className="pack-image-container">
+    <div 
+    onClick={()=>{
+      handleImageClick(src, color)
+    }}
+    className="pack-image-container">
              <img src={src} alt="image" />
           </div>
   )
