@@ -1,37 +1,48 @@
 import { Swiper, SwiperSlide} from 'swiper/react'
 import "swiper/css"
 import { useRef, useState } from 'react'
-import DownloadButton from './DownloadButton'
+import downloadIcon from "../assets/download.svg"
 import { useNavigate } from 'react-router-dom'
 import JSZip from 'jszip'
+import saveAs from "file-saver"
+import { useEffect } from 'react'
 
 function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, previewPhotoThree, user,id}) {
     const sliderRef = useRef()
     const navigate = useNavigate()
     const [activeIndex, setActiveIndex] = useState(0)
-    const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
+    const [currentImageArray, setCurrentImageArray] = useState([])
+    const key = "nSGaXcvn30yl4gUPEV4q1C-G_Djvs8mzKOBVCPpd_dM"
+
     function handleViewImagesClick(id){
         navigate(`/packview/${id}`)
     }
+        let page = 1
+        let perPage = 30
+        let totalImages = total
+        let images = []
 
-    function handleImageDownload(){
-        const zip = new JSZip
-        fetch(`https://api.unsplash.com/collections/${id}/photos?client_id=${key}&per_page=30`)
-        .then(response => response.json())
-        .then(images=>{            
-            const imagesArray = [...images]
-            console.log(imagesArray)
+        useEffect(()=>{
+            localStorage.setItem("total-images", total)
+        }, [])
+
+        function handleImageDownload(){
+            return fetch(`https://api.unsplash.com/collections/${id}/photos?client_id=${key}&page=${page}&per_page=${perPage}`)           
+            .then(response => response.json())
+            .then(data=>{
+                images.push(...data)
+                if (images.length == totalImages) {
+                    console.log(images)
+                    const zip = new JSZip             
             let photoZip = zip.folder(`${title} by ${user}`)
             const promises = [] 
-            let z;
-            let flag;
-            for (let i = 0; i < imagesArray.length; i++) {
-               const promise = fetch(imagesArray[i].urls.small)
+            for (let i = 0; i < images.length; i++) {
+               const promise = fetch(images[i].urls.regular)
                 .then(response => response.blob())
                 .then(blob => {
-                    z = photoZip.file(`test${i}.jpg`, blob)
+                    photoZip.file(`test${i}.jpg`, blob)
                     promises.push(promise)
-                    if (promises.length == imagesArray.length) {
+                    if (promises.length == images.length) {
                         Promise.all(promises).then(()=> {
                         zip.generateAsync({type:"blob"}).then((content)=>{
                         saveAs(content, `${title} image pack.zip`)
@@ -40,9 +51,12 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
             }
             })
             }
-            
-        })
-    }
+                }else{
+                    page++
+                    handleImageDownload()
+                }
+            })
+        }     
 
   return (
     <div className="pack">
@@ -82,9 +96,12 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
             <p className="pack-number">• {total} images</p>
 
             <div className="buttons">
-                <DownloadButton 
+                <button 
                 onClick={handleImageDownload}
-                title={"Download"} />
+                className="download-button">
+                <img src={downloadIcon} alt="download icon" />
+                Download
+                </button>
 
                 <button 
                 onClick={()=> handleViewImagesClick(id)}

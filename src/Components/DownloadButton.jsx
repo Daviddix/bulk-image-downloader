@@ -1,6 +1,6 @@
 import downloadIcon from "../assets/download.svg"
 
-function DownloadButton({title, onClick}) {
+function DownloadButton({title, onClick, currentCollectionPack}) {
   return (
     <button 
     onClick={onClick}

@@ -1,4 +1,4 @@
-import DownloadButton from '../../Components/DownloadButton'
+import downloadIcon from "../../assets/download.svg"
 import InputAndSearchButton from '../../Components/InputAndSearchButton'
 import arrowLeft from "../../assets/arrow-left.svg"
 import searchingSvg from "../../assets/searching.svg"
@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Image from '../../Components/Image'
 import ErrorComponent from '../../Components/ErrorComponent'
+import JSZip from "jszip"
 
 function PackView() {
    const {collectionId} = useParams()
@@ -18,7 +19,7 @@ function PackView() {
    const [imagePreviewSrc, setImagePreviewSrc] = useState("")
    const [bgColor, setBgColor] = useState("")
    const [previewPhotosArray, setPreviewPhotosArray] = useState([])
-   const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
+   const key = "nSGaXcvn30yl4gUPEV4q1C-G_Djvs8mzKOBVCPpd_dM"
 
    const collectionPhotos = previewPhotosArray.map((photo)=>{
       return <Image 
@@ -47,6 +48,43 @@ function PackView() {
     navigate(-1)
    }
 
+        let page = 1
+        let perPage = 30
+        let totalImages = localStorage.getItem("total-images")
+        let images = []
+
+        function handleImageDownload(){
+            return fetch(`https://api.unsplash.com/collections/${collectionId}/photos?client_id=${key}&page=${page}&per_page=${perPage}`)
+            .then(response => response.json())
+            .then(data=>{
+                images.push(...data)
+                if (images.length == totalImages) {
+                    console.log(images)
+                    const zip = new JSZip             
+            let photoZip = zip.folder(`${title} by ${user}`)
+            const promises = [] 
+            for (let i = 0; i < images.length; i++) {
+               const promise = fetch(images[i].urls.regular)
+                .then(response => response.blob())
+                .then(blob => {
+                    photoZip.file(`test${i}.jpg`, blob)
+                    promises.push(promise)
+                    if (promises.length == images.length) {
+                        Promise.all(promises).then(()=> {
+                        zip.generateAsync({type:"blob"}).then((content)=>{
+                        saveAs(content, `${title} image pack.zip`)
+            })
+            })
+            }
+            })
+            }
+                }else{
+                    page++
+                    handleImageDownload()
+                }
+            })
+        }  
+
 
   return (
     <div className="bg">
@@ -68,7 +106,12 @@ function PackView() {
          {collectionPhotos}           
         </div>
 
-        {!error && <DownloadButton title={"Download Pack"} />}
+        {!error && <button 
+                onClick={handleImageDownload}
+                className="download-button">
+                <img src={downloadIcon} alt="download icon" />
+                Download
+                </button>}
 
         {imagePreviewSrc && <ImagePreviewer src={imagePreviewSrc} bgColor={bgColor} setImagePreviewSrc={setImagePreviewSrc} /> }
     </main>
