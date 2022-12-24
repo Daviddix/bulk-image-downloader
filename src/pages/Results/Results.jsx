@@ -13,7 +13,7 @@ function Results() {
     const [error, setError] = useState(false)
     const {searchTerm} = useParams()  
     const [collectionArray, setCollectionArray] = useState([])
-    const key = "grlfAMIokyV8ggKFoRN7DuagfFeBWdcr8sxvWgpCvaQ"
+    const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
 
     useEffect(()=>{
         setIsLoading(true)

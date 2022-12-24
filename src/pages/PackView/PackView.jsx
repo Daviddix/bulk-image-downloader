@@ -18,7 +18,7 @@ function PackView() {
    const [imagePreviewSrc, setImagePreviewSrc] = useState("")
    const [bgColor, setBgColor] = useState("")
    const [previewPhotosArray, setPreviewPhotosArray] = useState([])
-   const key = "grlfAMIokyV8ggKFoRN7DuagfFeBWdcr8sxvWgpCvaQ"
+   const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
 
    const collectionPhotos = previewPhotosArray.map((photo)=>{
       return <Image 
