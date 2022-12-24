@@ -13,7 +13,7 @@ function Results() {
     const [error, setError] = useState(false)
     const {searchTerm} = useParams()  
     const [collectionArray, setCollectionArray] = useState([])
-    const key = "nSGaXcvn30yl4gUPEV4q1C-G_Djvs8mzKOBVCPpd_dM"
+    const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
 
     useEffect(()=>{
         setIsLoading(true)
@@ -54,7 +54,7 @@ function Results() {
         <InputAndSearchButton  />
         </header>
 
-    <main className='results'>      
+    {!isLoading && <main className='results'>      
         <p className='resultName'>Showing results for <span className="product">{searchTerm}</span></p>
         {error && <ErrorComponent />}
 
@@ -64,7 +64,7 @@ function Results() {
 
         </div>     
        
-    </main>
+    </main>}
 
     {isLoading && <div className="loader">
         <img src={searchingSvg} alt="image of a woman holding binoculars" />

@@ -287,6 +287,14 @@
     cursor: pointer;
 }
 
+.buttons button:focus{
+    transform: translateY(1px);
+    -webkit-transform: translateY(1px);
+    -moz-transform: translateY(1px);
+    -ms-transform: translateY(1px);
+    -o-transform: translateY(1px);
+}
+
 @keyframes glow {
     to{
         transform: scale(1.1);

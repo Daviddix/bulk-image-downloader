@@ -19,7 +19,7 @@ function PackView() {
    const [imagePreviewSrc, setImagePreviewSrc] = useState("")
    const [bgColor, setBgColor] = useState("")
    const [previewPhotosArray, setPreviewPhotosArray] = useState([])
-   const key = "nSGaXcvn30yl4gUPEV4q1C-G_Djvs8mzKOBVCPpd_dM"
+   const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
 
    const collectionPhotos = previewPhotosArray.map((photo)=>{
       return <Image 
@@ -29,6 +29,8 @@ function PackView() {
                color={photo.color}
                src={photo.urls.regular} />
    })
+   const [title, setTitle] = useState(()=> localStorage.getItem("images-title"))
+   const [user, setUser] = useState(()=> localStorage.getItem("images-user"))
 
    useEffect(()=>{
       fetch(`https://api.unsplash.com/collections/${collectionId}/photos?client_id=${key}&per_page=30`)
@@ -67,7 +69,7 @@ function PackView() {
                const promise = fetch(images[i].urls.regular)
                 .then(response => response.blob())
                 .then(blob => {
-                    photoZip.file(`test${i}.jpg`, blob)
+                    photoZip.file(`${images[i].description || "photo" + [i]}.jpg`, blob)
                     promises.push(promise)
                     if (promises.length == images.length) {
                         Promise.all(promises).then(()=> {
@@ -96,8 +98,8 @@ function PackView() {
         <InputAndSearchButton />
         </div>
 
-    <main className='pack-view'>      
-        <p className="pack-name">Sneakers Pack Album vol 1. [preview]<br />
+    {!isLoading && <main className='pack-view'>    
+        <p className="pack-name">{title} by {user} [preview]<br />
         <span className='pack-info'>*You can preview an image by clicking/tapping on it*</span>
          </p>
         {error && <ErrorComponent />}
@@ -114,7 +116,7 @@ function PackView() {
                 </button>}
 
         {imagePreviewSrc && <ImagePreviewer src={imagePreviewSrc} bgColor={bgColor} setImagePreviewSrc={setImagePreviewSrc} /> }
-    </main>
+    </main>}
 
     {isLoading && <div className="loader">
         <img src={searchingSvg} alt="image of a woman holding binoculars" />

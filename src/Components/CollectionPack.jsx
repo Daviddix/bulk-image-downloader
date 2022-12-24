@@ -5,26 +5,24 @@ import downloadIcon from "../assets/download.svg"
 import { useNavigate } from 'react-router-dom'
 import JSZip from 'jszip'
 import saveAs from "file-saver"
-import { useEffect } from 'react'
 
 function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, previewPhotoThree, user,id}) {
     const sliderRef = useRef()
     const navigate = useNavigate()
     const [activeIndex, setActiveIndex] = useState(0)
     const [currentImageArray, setCurrentImageArray] = useState([])
-    const key = "nSGaXcvn30yl4gUPEV4q1C-G_Djvs8mzKOBVCPpd_dM"
+    const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
 
-    function handleViewImagesClick(id){
+    function handleViewImagesClick(id,total,title,user){
         navigate(`/packview/${id}`)
+        localStorage.setItem("total-images", total)
+        localStorage.setItem("images-title", title)
+        localStorage.setItem("images-user", user)
     }
         let page = 1
         let perPage = 30
         let totalImages = total
         let images = []
-
-        useEffect(()=>{
-            localStorage.setItem("total-images", total)
-        }, [])
 
         function handleImageDownload(){
             return fetch(`https://api.unsplash.com/collections/${id}/photos?client_id=${key}&page=${page}&per_page=${perPage}`)           
@@ -40,7 +38,7 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
                const promise = fetch(images[i].urls.regular)
                 .then(response => response.blob())
                 .then(blob => {
-                    photoZip.file(`test${i}.jpg`, blob)
+                    photoZip.file(`${images[i].description || "photo" + [i]}.jpg`, blob)
                     promises.push(promise)
                     if (promises.length == images.length) {
                         Promise.all(promises).then(()=> {
@@ -80,16 +78,16 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
                 }}
                 className={activeIndex == 0? "active" : ""}></span>
 
-                <span 
+                {total >=2 && <span 
                 onClick={()=>{
                     sliderRef.current.swiper.slideTo(1)
                 }}
-                className={activeIndex == 1? "active" : ""}></span>
-                <span 
+                className={activeIndex == 1? "active" : ""}></span>}
+                {total >= 3 && <span 
                 onClick={()=>{
                     sliderRef.current.swiper.slideTo(2)
                 }}
-                className={activeIndex == 2? "active" : ""}></span>
+                className={activeIndex == 2? "active" : ""}></span>}
             </div>
 
             <p className="pack-name">• {title} by {user}</p>
@@ -104,7 +102,7 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
                 </button>
 
                 <button 
-                onClick={()=> handleViewImagesClick(id)}
+                onClick={()=> handleViewImagesClick(id, total, title, user)}
                 className='view-images-button'>View Images</button>
             </div>
         </div>
