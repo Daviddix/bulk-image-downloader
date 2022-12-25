@@ -14,7 +14,7 @@ function Results() {
     const {searchTerm} = useParams()  
     const [collectionArray, setCollectionArray] = useState([])
     const [downloadIndicator, setDownloadIndicator] = useState(true)
-    const key = "Bc123wiPTZSUOwE-qMPuy_AnivJvl3U8v28l4JJDes0"
+    const key = "g7d7KRxOl8fE437qOTxlsf9XYcd3ApDgtZlLs5XMa3Y"
 
     useEffect(()=>{
         setIsLoading(true)
