@@ -4,7 +4,7 @@ import BackToTop from '../../Components/BackToTop'
 import searchingSvg from "../../assets/searching.svg"
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import CollectionPack from '../../Components/CollectionPack'
 import ErrorComponent from '../../Components/ErrorComponent'
 
@@ -13,7 +13,8 @@ function Results() {
     const [error, setError] = useState(false)
     const {searchTerm} = useParams()  
     const [collectionArray, setCollectionArray] = useState([])
-    const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
+    const [downloadIndicator, setDownloadIndicator] = useState(true)
+    const key = "Bc123wiPTZSUOwE-qMPuy_AnivJvl3U8v28l4JJDes0"
 
     useEffect(()=>{
         setIsLoading(true)
@@ -38,6 +39,8 @@ function Results() {
     const collectionPack = collectionArray.map((collection)=>{
         return <CollectionPack
                 key={collection.id}
+                setDownloadIndicator={setDownloadIndicator}
+                altDescription={collection.cover_photo.alt_description}
                 id={collection.id}
                 title={collection.title}
                 total={collection.total_photos}
@@ -70,6 +73,11 @@ function Results() {
         <img src={searchingSvg} alt="image of a woman holding binoculars" />
         <p>Searching for images...</p>
     </div>}
+
+    <div 
+    className="download-indicator">
+        <p>Your download will start soon</p>
+    </div>
     
     <BackToTop />
     </div>

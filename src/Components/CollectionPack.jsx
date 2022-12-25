@@ -6,12 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import JSZip from 'jszip'
 import saveAs from "file-saver"
 
-function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, previewPhotoThree, user,id}) {
+function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, previewPhotoThree, user,id, altDescription, setDownloadIndicator}) {
     const sliderRef = useRef()
     const navigate = useNavigate()
     const [activeIndex, setActiveIndex] = useState(0)
-    const [currentImageArray, setCurrentImageArray] = useState([])
-    const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
+    const key = "g7d7KRxOl8fE437qOTxlsf9XYcd3ApDgtZlLs5XMa3Y"
 
     function handleViewImagesClick(id,total,title,user){
         navigate(`/packview/${id}`)
@@ -24,13 +23,12 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
         let totalImages = total
         let images = []
 
-        function handleImageDownload(){
+    function handleImageDownload(){
             return fetch(`https://api.unsplash.com/collections/${id}/photos?client_id=${key}&page=${page}&per_page=${perPage}`)           
             .then(response => response.json())
             .then(data=>{
                 images.push(...data)
                 if (images.length == totalImages) {
-                    console.log(images)
                     const zip = new JSZip             
             let photoZip = zip.folder(`${title} by ${user}`)
             const promises = [] 
@@ -54,7 +52,10 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
                     handleImageDownload()
                 }
             })
-        }     
+            .catch((err)=>{
+                alert("Seems like an error ocurred while trying to download, please check your internet connection and try again")
+            })
+    }     
 
   return (
     <div className="pack">
@@ -65,11 +66,11 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
                 setActiveIndex(e.activeIndex)
             }}
             >
-                <SwiperSlide><img src={previewPhotoOne} alt="" /></SwiperSlide>
+                <SwiperSlide><img src={previewPhotoOne} alt={altDescription} /></SwiperSlide>
 
-                <SwiperSlide><img src={previewPhotoTwo} alt="" /></SwiperSlide>
+                <SwiperSlide><img src={previewPhotoTwo} alt={`photo relating to ${title}`} /></SwiperSlide>
 
-                <SwiperSlide><img src={previewPhotoThree} alt="" /></SwiperSlide>
+                <SwiperSlide><img src={previewPhotoThree} alt={`photo relating to ${title}`} /></SwiperSlide>
             </Swiper>
             <div className="dots">
                 <span 
@@ -105,7 +106,7 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
                 onClick={()=> handleViewImagesClick(id, total, title, user)}
                 className='view-images-button'>View Images</button>
             </div>
-        </div>
+     </div>
   )
 }
 

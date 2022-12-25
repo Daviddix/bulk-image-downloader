@@ -76,6 +76,43 @@ main.pack-view{
     margin:2rem auto;
 }
 
+.download-indicator{
+    display: none;
+    border: 1px solid rgba(0, 128, 0, 0.26);
+    position: fixed;
+    top:10rem;
+    left:50%;
+    transform: translate(-50%, 0);
+    width:90vw;
+    max-width:25rem;
+    padding:1.2rem 1rem;
+    margin: auto;
+    background-color: rgb(211, 255, 211);
+    box-shadow: 0 0 .5rem rgba(11, 212, 55, 0.39);
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+}
+
+.download-indicator.hidden{
+    display: block;
+    animation: disappear 2s ease-in-out forwards;
+    -webkit-animation: disappear 2s ease-in-out forwards;
+}
+
+.download-indicator p{
+    font-size: 1.5rem;
+    font-family: montserrat;
+    text-align: center;
+    color:rgb(9, 105, 9);
+}
+
 @media screen and (min-width:850px) {
     .pack-view .pack-images{
         display: grid;
@@ -106,4 +143,16 @@ button:hover{
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
     -o-transform: scale(1.2);
+}
+
+@keyframes disappear {
+    to{
+        transform: translate(-50%, -10rem);
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: translate(-50%, -10rem);
+        -moz-transform: translate(-50%, -10rem);
+        -ms-transform: translate(-50%, -10rem);
+        -o-transform: translate(-50%, -10rem);
+}
 }

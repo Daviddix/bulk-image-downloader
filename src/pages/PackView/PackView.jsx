@@ -19,7 +19,7 @@ function PackView() {
    const [imagePreviewSrc, setImagePreviewSrc] = useState("")
    const [bgColor, setBgColor] = useState("")
    const [previewPhotosArray, setPreviewPhotosArray] = useState([])
-   const key = "zpf7VaeKXkulZaTHFRI1ZpnkVuStzNVz1NwoM8A-NEI"
+   const key = "g7d7KRxOl8fE437qOTxlsf9XYcd3ApDgtZlLs5XMa3Y"
 
    const collectionPhotos = previewPhotosArray.map((photo)=>{
       return <Image 
@@ -27,10 +27,12 @@ function PackView() {
                setImagePreviewSrc={setImagePreviewSrc}
                setBgColor={setBgColor}
                color={photo.color}
+               description={photo.description}
                src={photo.urls.regular} />
    })
    const [title, setTitle] = useState(()=> localStorage.getItem("images-title"))
    const [user, setUser] = useState(()=> localStorage.getItem("images-user"))
+   const [downloadIndicator, setDownloadIndicator] = useState(false)
 
    useEffect(()=>{
       fetch(`https://api.unsplash.com/collections/${collectionId}/photos?client_id=${key}&per_page=30`)
@@ -46,7 +48,7 @@ function PackView() {
       })
    }, [])
 
-   function navigateToPreviousPage(){
+    function navigateToPreviousPage(){
     navigate(-1)
    }
 
@@ -55,13 +57,17 @@ function PackView() {
         let totalImages = localStorage.getItem("total-images")
         let images = []
 
-        function handleImageDownload(){
+    function handleImageDownload(){
             return fetch(`https://api.unsplash.com/collections/${collectionId}/photos?client_id=${key}&page=${page}&per_page=${perPage}`)
             .then(response => response.json())
             .then(data=>{
                 images.push(...data)
                 if (images.length == totalImages) {
-                    console.log(images)
+                    setDownloadIndicator(true)
+                    setTimeout(() => {
+                        setDownloadIndicator(false)
+                    }, 2000)
+
                     const zip = new JSZip             
             let photoZip = zip.folder(`${title} by ${user}`)
             const promises = [] 
@@ -84,6 +90,9 @@ function PackView() {
                     page++
                     handleImageDownload()
                 }
+            })
+            .catch((err)=>{
+                alert("Seems like an error ocurred while trying to download, please check your internet connection and try again")
             })
         }  
 
@@ -121,6 +130,10 @@ function PackView() {
     {isLoading && <div className="loader">
         <img src={searchingSvg} alt="image of a woman holding binoculars" />
         <p>Loading Preview...</p>
+    </div>}
+
+    {downloadIndicator == true && <div className="download-indicator hidden">
+        <p>Your download will start soon</p>
     </div>}
     </div>
 

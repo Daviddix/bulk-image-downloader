@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import searchIcon from "../assets/search.svg"
@@ -5,14 +6,17 @@ import searchIcon from "../assets/search.svg"
 function InputAndSearchButton() {
   const [searchInput, setSearchInput] = useState("")
   const [inputError, setInputError] = useState(false)
+  const inputRef = useRef(null)
   const navigate = useNavigate()
 
   function formValidator(e,value){
     e.preventDefault()
     if (value.trim()) {
+      inputRef.current.blur()
       navigate(`/${value}`)
       setSearchInput("")
     }else{
+      inputRef.current.blur()
       setInputError(true)
     }
   }
@@ -25,7 +29,8 @@ function InputAndSearchButton() {
 
     <input
     value={searchInput}
-
+    ref={inputRef}
+    tabIndex={0}
     onChange={(e)=>{
       setInputError(false)
       setSearchInput(e.target.value)
