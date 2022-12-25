@@ -13,7 +13,7 @@ function Results() {
     const [error, setError] = useState(false)
     const {searchTerm} = useParams()  
     const [collectionArray, setCollectionArray] = useState([])
-    const [downloadIndicator, setDownloadIndicator] = useState(true)
+    const [downloadIndicator, setDownloadIndicator] = useState(false)
     const key = "g7d7KRxOl8fE437qOTxlsf9XYcd3ApDgtZlLs5XMa3Y"
 
     useEffect(()=>{
@@ -74,10 +74,9 @@ function Results() {
         <p>Searching for images...</p>
     </div>}
 
-    <div 
-    className="download-indicator">
+    {downloadIndicator == true && <div className="download-indicator hidden">
         <p>Your download will start soon</p>
-    </div>
+    </div>}
     
     <BackToTop />
     </div>

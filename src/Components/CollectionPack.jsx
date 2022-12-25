@@ -29,6 +29,11 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
             .then(data=>{
                 images.push(...data)
                 if (images.length == totalImages) {
+                    setDownloadIndicator(true)
+                    setTimeout(() => {
+                        setDownloadIndicator(false)
+                    }, 2000)
+                    
                     const zip = new JSZip             
             let photoZip = zip.folder(`${title} by ${user}`)
             const promises = [] 
@@ -36,12 +41,12 @@ function collectionPack({title, total, previewPhotoOne, previewPhotoTwo, preview
                const promise = fetch(images[i].urls.regular)
                 .then(response => response.blob())
                 .then(blob => {
-                    photoZip.file(`${images[i].description || "photo" + [i]}.jpg`, blob)
+                    photoZip.file(`${title + [i]}.jpg`, blob)
                     promises.push(promise)
                     if (promises.length == images.length) {
                         Promise.all(promises).then(()=> {
                         zip.generateAsync({type:"blob"}).then((content)=>{
-                        saveAs(content, `${title} image pack.zip`)
+                        saveAs(content, `${title} by ${user} image pack.zip`)
             })
             })
             }

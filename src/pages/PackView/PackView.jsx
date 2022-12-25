@@ -75,12 +75,12 @@ function PackView() {
                const promise = fetch(images[i].urls.regular)
                 .then(response => response.blob())
                 .then(blob => {
-                    photoZip.file(`${images[i].description || "photo" + [i]}.jpg`, blob)
+                    photoZip.file(`${title + [i]}.jpg`, blob)
                     promises.push(promise)
                     if (promises.length == images.length) {
                         Promise.all(promises).then(()=> {
                         zip.generateAsync({type:"blob"}).then((content)=>{
-                        saveAs(content, `${title} image pack.zip`)
+                        saveAs(content, `${title} by ${user} image pack.zip`)
             })
             })
             }

@@ -102,8 +102,8 @@ main.pack-view{
 
 .download-indicator.hidden{
     display: block;
-    animation: disappear 2s ease-in-out forwards;
-    -webkit-animation: disappear 2s ease-in-out forwards;
+    animation: disappear 4s ease-in-out forwards;
+    -webkit-animation: disappear 4s ease-in-out forwards;
 }
 
 .download-indicator p{
@@ -142,7 +142,7 @@ button:hover{
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
-    -o-transform: scale(1.2);
+    -o-transform: scale(1.2);    
 }
 
 @keyframes disappear {
