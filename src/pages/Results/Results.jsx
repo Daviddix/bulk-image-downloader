@@ -4,7 +4,7 @@ import BackToTop from '../../Components/BackToTop'
 import searchingSvg from "../../assets/searching.svg"
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import CollectionPack from '../../Components/CollectionPack'
 import ErrorComponent from '../../Components/ErrorComponent'
 

@@ -13,7 +13,7 @@ function Home() {
         <p className="heading">
             Download <span>Bulk Images</span> without stress
         </p>
-        <p className="subheading">Using Bulk Downloader, you can download 30+ images at once at just the click of a button
+        <p className="subheading">Using Bulk Downloader, you can download over 30+ images at once with just one click
         </p>
 
       <InputAndSearchButton  />
