@@ -50,6 +50,8 @@
     width:100%;
 }
 
+
+
 @media screen and (min-width:850px){
     .background .preview-content{
         max-width: 45rem;
@@ -58,6 +60,22 @@
     .preview-content .image-container{
         height:60rem;
         max-width: 45rem;
+    }
+}
+
+@media screen and (max-height:850px) {
+    .background .preview-content{
+        max-width: 40rem;
+    }
+
+    .background .preview-content{
+        margin: 3rem auto 0;
+    }
+
+    .preview-content .image-container{
+        width: 100%;
+        max-width: 40rem;
+        height: 50rem;
     }
 }
 
