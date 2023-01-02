@@ -7,7 +7,7 @@
     </mask>
   </defs>
   <g>
-    <rect width="268" height="268" x="0" y="0" fill="transparent" rx="30" ry="30"/>
+    <rect width="268" height="268" x="0" y="0" fill="rgb(3,5,23)" rx="30" ry="30"/>
     <use fill="none" xlink:href="#rect-2"/>
     <g mask="url(#mask-3)">
       <path fill="none" stroke="rgb(255,255,255)" stroke-dasharray="0 0 0 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" d="M234.5 167.5v44.66666667C234.5 224.50102608 224.50102608 234.5 212.16666667 234.5H55.83333333C43.49897392 234.5 33.5 224.50102608 33.5 212.16666667V167.5"/>
