@@ -27,7 +27,7 @@ Users are able to:
 
 ### Screenshot
 
-![screenshot of the collection pack](/src/assets/proof.png)
+![screenshot of the collection pack](/src/assets/proof.PNG)
 ![screenshot of collection pack preview](/src/assets/Screenshot%20(196).png)
 
 ### Link
