@@ -21,8 +21,6 @@ Users are able to:
 
 - Download selected collection packs
 
-- See link for external definition of the given word
-
     +other additional features
 
 ### Screenshot
